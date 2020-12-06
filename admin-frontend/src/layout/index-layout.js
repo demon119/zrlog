@@ -24,11 +24,11 @@ import * as axios from "axios";
 
 import {BaseResourceComponent} from "../components/base-resource-component";
 import AdminLoginedRouter from "../routers/admin-logined-router";
+import './index-layout.css'
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu;
 const {Title, Text} = Typography;
-import './index-layout.css'
 
 function getDefaultOpenKeys() {
     if (window.location.pathname === '/admin/link' || window.location.pathname === '/admin/nav' || window.location.pathname === '/admin/blog/type') {

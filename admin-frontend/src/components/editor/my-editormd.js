@@ -1,7 +1,6 @@
 import React from "react";
 import makeAsyncScriptLoader from "react-async-script";
 import {BaseResourceComponent} from "../base-resource-component";
-import 'font-awesome/css/font-awesome.min.css';
 import './my-editormd.css';
 import $ from 'jquery';
 
@@ -9,7 +8,7 @@ class MyEditorMd extends BaseResourceComponent {
 
     componentDidMount() {
         super.componentDidMount();
-        let {config} = this.props;
+        let {config, markdown, editorPlaceholder} = this.props;
         let {
             id, width, height, path, theme, previewTheme, editorTheme, codeFold, syncScrolling,
             saveHTMLToTextarea, searchReplace, watch, htmlDecode, toolbar, previewCodeHighlight, emoji,
@@ -17,66 +16,58 @@ class MyEditorMd extends BaseResourceComponent {
             dialogMaskOpacity, dialogMaskBgColor, imageUpload, imageFormats, imageUploadURL,
         } = config;
 
-        let {markdown, editorPlaceholder} = this.props;
+        // eslint-disable-next-line no-undef,no-unused-vars
+        let editor = editormd(id, $, {
+            width: width,
+            height: height,
+            path: path,
+            theme: theme,
+            placeholder: editorPlaceholder,
+            previewTheme: previewTheme,
+            editorTheme: editorTheme,
+            markdown: markdown,
+            codeFold: codeFold,
+            syncScrolling: syncScrolling,
+            saveHTMLToTextarea: saveHTMLToTextarea,    // 保存 HTML 到 Textarea
+            searchReplace: searchReplace,
+            watch: watch,                // 关闭实时预览
+            htmlDecode: htmlDecode,            // 开启 HTML 标签解析，为了安全性，默认不开启
+            toolbar: toolbar,             //关闭工具栏
+            previewCodeHighlight: previewCodeHighlight, // 关闭预览 HTML 的代码块高亮，默认开启
+            emoji: emoji,
+            taskList: taskList,
+            tocm: tocm,         // Using [TOCM]
+            tex: tex,                   // 开启科学公式TeX语言支持，默认关闭
+            flowChart: flowChart,             // 开启流程图支持，默认关闭
+            sequenceDiagram: sequenceDiagram,       // 开启时序/序列图支持，默认关闭,
+            dialogLockScreen: dialogLockScreen,   // 设置弹出层对话框不锁屏，全局通用，默认为true
+            dialogShowMask: dialogShowMask,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
+            dialogDraggable: dialogDraggable,    // 设置弹出层对话框不可拖动，全局通用，默认为true
+            dialogMaskOpacity: dialogMaskOpacity,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
+            dialogMaskBgColor: dialogMaskBgColor, // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
+            imageUpload: imageUpload,
+            imageFormats: imageFormats,
+            imageUploadURL: imageUploadURL,
+            onload: function () {
+                $("#fileDialog").on("click", function () {
+                    editor.executePlugin("fileDialog", "file-dialog/file-dialog");
+                });
+                $("#videoDialog").on("click", function () {
+                    editor.executePlugin("videoDialog", "video-dialog/video-dialog");
+                });
+                $("#copPreviewHtmlToClipboard").on("click", function () {
+                    function copyToClipboard(html) {
+                        const temp = $("<input>");
+                        $("body").append(temp);
+                        temp.val(html).select();
+                        document.execCommand("copy");
+                        temp.remove();
+                    }
 
-        try {
-            // eslint-disable-next-line no-undef,no-unused-vars
-            let editor = editormd(id, $, {
-                width: width,
-                height: height,
-                path: path,
-                theme: theme,
-                placeholder: editorPlaceholder,
-                previewTheme: previewTheme,
-                editorTheme: editorTheme,
-                markdown: markdown,
-                codeFold: codeFold,
-                syncScrolling: syncScrolling,
-                saveHTMLToTextarea: saveHTMLToTextarea,    // 保存 HTML 到 Textarea
-                searchReplace: searchReplace,
-                watch: watch,                // 关闭实时预览
-                htmlDecode: htmlDecode,            // 开启 HTML 标签解析，为了安全性，默认不开启
-                toolbar: toolbar,             //关闭工具栏
-                previewCodeHighlight: previewCodeHighlight, // 关闭预览 HTML 的代码块高亮，默认开启
-                emoji: emoji,
-                taskList: taskList,
-                tocm: tocm,         // Using [TOCM]
-                tex: tex,                   // 开启科学公式TeX语言支持，默认关闭
-                flowChart: flowChart,             // 开启流程图支持，默认关闭
-                sequenceDiagram: sequenceDiagram,       // 开启时序/序列图支持，默认关闭,
-                dialogLockScreen: dialogLockScreen,   // 设置弹出层对话框不锁屏，全局通用，默认为true
-                dialogShowMask: dialogShowMask,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
-                dialogDraggable: dialogDraggable,    // 设置弹出层对话框不可拖动，全局通用，默认为true
-                dialogMaskOpacity: dialogMaskOpacity,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
-                dialogMaskBgColor: dialogMaskBgColor, // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
-                imageUpload: imageUpload,
-                imageFormats: imageFormats,
-                imageUploadURL: imageUploadURL,
-                onload: function () {
-                    // eslint-disable-next-line no-undef
-                    const jquery = $;
-                    jquery("#fileDialog").on("click", function () {
-                        editor.executePlugin("fileDialog", "file-dialog/file-dialog");
-                    });
-                    jquery("#videoDialog").on("click", function () {
-                        editor.executePlugin("videoDialog", "video-dialog/video-dialog");
-                    });
-                    jquery("#copPreviewHtmlToClipboard").on("click", function () {
-                        function copyToClipboard(html) {
-                            const temp = jquery("<input>");
-                            jquery("body").append(temp);
-                            temp.val(html).select();
-                            document.execCommand("copy");
-                            temp.remove();
-                        }
-
-                        copyToClipboard('<div class="markdown-body" style="padding:0">' + editor.getPreviewedHTML() + "</div>");
-                    });
-                },
-            });
-        } catch (e) {
-
-        }
+                    copyToClipboard('<div class="markdown-body" style="padding:0">' + editor.getPreviewedHTML() + "</div>");
+                });
+            },
+        });
     }
 
     render() {
@@ -128,7 +119,8 @@ export class MyEditorMdWrapper extends React.PureComponent {
             console.info(this.props.markdown)
             return (
                 <>
-                    <MyEditorMd editorPlaceholder={this.props.editorPlaceholder} config={this.getEditorConfig()}
+                    <MyEditorMd editorPlaceholder={this.props.editorPlaceholder}
+                                config={this.getEditorConfig()}
                                 markdown={this.props.markdown}/>
                 </>
             )

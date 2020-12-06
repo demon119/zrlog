@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run build:react && npm run build:bundle",
+    "build": "yarn run build:react && yarn run build:bundle",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:react": "GENERATE_SOURCEMAP=false react-scripts build",

@@ -120,7 +120,7 @@ class Article extends BaseTableComponent {
                 <Divider/>
                 <Row style={{paddingBottom: "10px"}}>
                     <Col span={24}>
-                        <Search placeholder={this.state.res.searchTip} onSearch={this.onErrSearch} enterButton
+                        <Search placeholder={this.state.res.searchTip} onSearch={this.onErrSearch} enterbutton='true'
                                 style={{maxWidth: "240px", float: "right"}}/>
                     </Col>
                 </Row>

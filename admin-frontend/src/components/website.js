@@ -179,7 +179,7 @@ class Website extends BaseResourceComponent {
                                         <TextArea rows={5}/>
                                     </Form.Item>
                                     <Divider/>
-                                    <Button type='primary' enterButton
+                                    <Button type='primary' enterbutton='true'
                                             htmlType='submit'>{this.state.res.submit}</Button>
                                 </Form>
                             </Col>
@@ -220,7 +220,7 @@ class Website extends BaseResourceComponent {
                                         </Select>
                                     </Form.Item>
                                     <Divider/>
-                                    <Button type='primary' enterButton
+                                    <Button type='primary' enterbutton='true'
                                             htmlType='submit'>{this.state.res.submit}</Button>
                                 </Form>
                             </Col>
@@ -289,7 +289,7 @@ class Website extends BaseResourceComponent {
                                         <TextArea rows={7}/>
                                     </Form.Item>
                                     <Divider/>
-                                    <Button type='primary' enterButton
+                                    <Button type='primary' enterbutton='true'
                                             htmlType='submit'>{this.state.res.submit}</Button>
                                 </Form>
                             </Col>
@@ -330,7 +330,7 @@ class Website extends BaseResourceComponent {
                                         <Switch/>
                                     </Form.Item>
                                     <Divider/>
-                                    <Button type='primary' enterButton
+                                    <Button type='primary' enterbutton='true'
                                             htmlType='submit'>{this.state.res.submit}</Button>
                                 </Form>
                             </Col>

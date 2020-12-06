@@ -48,7 +48,7 @@ class UserUpdatePassword extends BaseResourceComponent {
                         <Input.Password/>
                     </Form.Item>
                     <Divider/>
-                    <Button type='primary' enterButton htmlType='submit'>{this.state.res.submit}</Button>
+                    <Button type='primary' enterbutton='true' htmlType='submit'>{this.state.res.submit}</Button>
                 </Form>
             </Spin>
         )

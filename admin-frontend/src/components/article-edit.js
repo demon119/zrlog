@@ -185,7 +185,7 @@ class ArticleEdit extends BaseResourceComponent {
                                             <SaveOutlined/>
                                             {this.state.res.preview}
                                         </Button>
-                                        <Button type='primary' enterButton
+                                        <Button type='primary' enterbutton='true'
                                                 htmlType='submit'>
                                             <SendOutlined/>
                                             {this.state.res.release}</Button>

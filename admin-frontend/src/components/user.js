@@ -121,7 +121,7 @@ class User extends BaseResourceComponent {
                         </Col>
                     </Row>
                     <Form.Item>
-                        <Button type="primary" enterButton htmlType='submit'>
+                        <Button type="primary" enterbutton='true' htmlType='submit'>
                             {this.state.res.submit}
                         </Button>
                     </Form.Item>

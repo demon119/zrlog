@@ -100,7 +100,7 @@ class Login extends BaseResourceComponent {
                                 </Form.Item>
 
                                 <Form.Item {...tailLayout}>
-                                    <Button type="primary" enterButton htmlType='submit'>
+                                    <Button type="primary" enterbutton='true' htmlType='submit'>
                                         <LoginOutlined/> {this.state.res.login}
                                     </Button>
                                 </Form.Item>
